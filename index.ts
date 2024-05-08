@@ -1,6 +1,7 @@
 #! /usr/bin/env node    
 
 import inquirer from "inquirer";
+import chalk from "chalk"
 
 let todos : string[] =[];
 let conditions = true;
@@ -10,12 +11,12 @@ while (conditions) {
     {
       name: "todo",
       type: "input",
-      message: "What you want to add in your Todos list?",
+      message: chalk.bold.magentaBright("What you want to add in your Todos list?",)
     },
     {
       name: "addMore",
       type: "confirm",
-      message: "Do you want to add more?",
+      message: chalk.bold.bold.magentaBright("Do you want to add more?"),
       default: "false",
     },
   ]);
@@ -23,7 +24,7 @@ while (conditions) {
 
   todos.push(todoAns.todo);
 
-  console.log(todos);
+  console.log(chalk.blueBright(todos));
 
   conditions = todoAns.addMore;
 
@@ -32,7 +33,7 @@ while (conditions) {
       {
         name: "delete",
         type: "confirm",
-        message: "you want to delete anything in todo? ",
+        message: chalk.bold.magentaBright("you want to delete anything in todo? "),
         default: "false",
       },
     ]);
@@ -41,16 +42,16 @@ while (conditions) {
       let deleteAns = await inquirer.prompt([
         {
           name: "index",
-          message: "Select an element which you want to delete and choices todos:",
+          message: chalk.bold.greenBright("Select an element which you want to delete and choices todos:"),
           type: "list",
           choices: todos,
         },
       ]);
       let index: number = todos.indexOf(deleteAns.index);
       todos.splice(index, 1);
-      console.log(todos);
+      console.log(chalk.bold.blueBright(todos));
 
       conditions = false;
-    } 
+    }
   }
-}
+};
